@@ -1,5 +1,5 @@
 import * as bip39 from "bip39";
-import { Keypair } from "@solana/web3.js";
+import { Keypair, PublicKey } from "@solana/web3.js";
 import { mnemonics } from "../atoms/mnemonics"
 import { KeyPair } from "../atoms/KeyPair";
 import { useRecoilState } from "recoil";
@@ -10,8 +10,8 @@ import { Delete } from "../icons/Delete";
 export const Wallet = () => {
 
     const [mneMonics, setMnemonics] = useRecoilState(mnemonics);
-    const [privateKey, setPrivateKey] = useRecoilState(privateK)
-    const [publicKey, setPublicKey] = useRecoilState(publicK)
+    const [, setPrivateKey] = useRecoilState(privateK)
+    const [, setPublicKey] = useRecoilState(publicK)
     const [keyPair, setkeyPair] = useRecoilState(KeyPair)
 
     const generateMnemonicFunction = async () => {
@@ -35,7 +35,14 @@ export const Wallet = () => {
 
 
     };
-        
+
+    function clearWallets(){
+        setkeyPair([])
+    }
+    
+    function clearCurrentWallet(p:String){
+        setkeyPair(prev=>prev.filter(pair=>pair.PublicKey !== p));
+    }
 
     return (
         <div>
@@ -45,7 +52,7 @@ export const Wallet = () => {
                 </div>
                 <div className="flex gap-5">
                     <button className="p-3 bg-black text-white rounded hover:bg-gray-800 font-mono" onClick={()=>generateMnemonicFunction()}>Add Wallet</button>
-                    <button className="p-3 bg-red-500 text-white rounded hover:bg-red-600">Clear Wallets</button>
+                    <button className="p-3 bg-red-500 text-white rounded hover:bg-red-600" onClick={()=>clearWallets()}>Clear Wallets</button>
                 </div>
             </div>
             <div>
@@ -58,7 +65,7 @@ export const Wallet = () => {
                                         <div className="font-mono text-2xl font-bold">
                                             Wallet {index + 1}
                                         </div>
-                                        <div className="text-red-600">
+                                        <div className="text-red-600" onClick={()=>clearCurrentWallet(pair.PublicKey)}>
                                             <Delete/>
                                         </div>
                                     </div>

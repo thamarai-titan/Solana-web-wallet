@@ -1,7 +1,7 @@
 export function StarterComponent() {
     return (
         <div>
-            <div className="border-1 m-3">
+            <div className="border-1 m-5">
                 <div className="px-9 pt-9 text-2xl font-black font-mono">
                     Create Your Wallet with Solana
                 </div>
