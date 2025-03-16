@@ -2,10 +2,12 @@ import { StarterComponent } from "./components/StarterComponent.tsx";
 import { Mnemonics } from "./components/Mnemonics.tsx";
 import { Moon } from "./icons/Moon.tsx";
 import { Wallet } from "./components/Wallet.tsx";
+import { useRecoilState } from "recoil";
+import { start } from "./atoms/start.ts";
 
 function App() {
 
-
+  const [starting] = useRecoilState(start)
 
   return (
     <div>
@@ -19,10 +21,9 @@ function App() {
       </div>
 
 
-
-      <StarterComponent />
-      <Mnemonics />
-      <Wallet />
+      {(starting) ? <StarterComponent/> : <div><Mnemonics/><Wallet/></div>}
+      
+     
     </div>
   );
 }
