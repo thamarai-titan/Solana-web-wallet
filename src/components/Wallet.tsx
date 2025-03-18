@@ -6,6 +6,8 @@ import { useRecoilState } from "recoil";
 import { privateK } from "../atoms/privateK";
 import { publicK } from "../atoms/publicK";
 import { Delete } from "../icons/Delete";
+import { useEffect } from "react";
+import { start } from "../atoms/start";
 
 export const Wallet = () => {
 
@@ -14,6 +16,7 @@ export const Wallet = () => {
     const [, setPublicKey] = useRecoilState(publicK)
     const [keyPair, setkeyPair] = useRecoilState(KeyPair)
 
+   
     const generateMnemonicFunction = async () => {
         const words = bip39.generateMnemonic(mneMonics.length === 12 ? 128 : 256);
         setMnemonics(words.split(" "));
