@@ -1,7 +1,7 @@
 import * as bip39 from "bip39";
 import { Keypair } from "@solana/web3.js";
 import { derivePath } from "ed25519-hd-key";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { mnemonics } from "../atoms/mnemonics";
 import { KeyPair } from "../atoms/KeyPair";
 import { privateK } from "../atoms/privateK";
@@ -22,15 +22,13 @@ interface Notification {
     id: number;
     message: string;
 }
-interface WalletProps {
-    className?: string;
-}
-export const Wallet: React.FC = ({ className }: WalletProps) => {
+
+export const Wallet: React.FC = () => {
     const [mneMonics, setMnemonics] = useRecoilState(mnemonics);
     const [, setPrivateKey] = useRecoilState(privateK);
     const [, setPublicKey] = useRecoilState(publicK);
     const [keyPair, setKeyPair] = useRecoilState<WalletInfo[]>(KeyPair);
-    const [seed, setSeed] = useRecoilState(seedAtom);
+    const setSeed = useSetRecoilState(seedAtom);
     const [walletCount, setWalletCount] = useState<number>(0);
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
