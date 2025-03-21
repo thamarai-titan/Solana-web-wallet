@@ -1,6 +1,13 @@
-import {atom} from "recoil"
+import { atom } from "recoil";
 
-export const KeyPair = atom<{PublicKey: String; PrivateKey: String}[]>({
-    key:"KeyPair",
-    default:[]
-})
+interface WalletInfo {
+    PublicKey: string;
+    PrivateKey: string;
+    Path: string;
+}
+
+// ✅ Ensure KeyPair is correctly typed
+export const KeyPair = atom<WalletInfo[]>({
+    key: "KeyPair",
+    default: [],
+});

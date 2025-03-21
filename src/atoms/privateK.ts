@@ -1,5 +1,5 @@
 import {atom} from "recoil"
-export const privateK = atom<String>({
+export const privateK = atom<string>({
     key:"privateKey",
     default:""
 })
