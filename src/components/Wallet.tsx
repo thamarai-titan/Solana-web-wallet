@@ -22,8 +22,10 @@ interface Notification {
     id: number;
     message: string;
 }
-
-export const Wallet: React.FC = () => {
+interface WalletProps {
+    className?: string;
+}
+export const Wallet: React.FC = ({ className }: WalletProps) => {
     const [mneMonics, setMnemonics] = useRecoilState(mnemonics);
     const [, setPrivateKey] = useRecoilState(privateK);
     const [, setPublicKey] = useRecoilState(publicK);
@@ -125,4 +127,4 @@ export const Wallet: React.FC = () => {
             </div>
         </div>
     );
-};
+}; 

@@ -82,4 +82,4 @@ export function Mnemonics() {
             </AnimatePresence>
         </div>
     );
-}
+} 
